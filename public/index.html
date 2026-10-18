@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat & Draw Room</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="join-screen" class="screen">
+      <h1>Join a room</h1>
+
+      <div class="field">
+        <label for="username">Your name</label>
+        <div class="name-row">
+          <input id="username" maxlength="30" placeholder="oak" />
+          <button id="rollName" type="button" aria-label="Roll a new random name">🎲</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="roomCode">Room code (max 10 chars)</label>
+        <input id="roomCode" maxlength="10" placeholder="Leave blank to create a room" />
+      </div>
+
+      <button id="joinBtn" class="primary">Join or create room</button>
+      <p class="helper">Simple names like oak, arrow, ketchup. Room codes can use letters, numbers, _ and -.</p>
+    </div>
+
+    <div id="room-screen" class="screen hidden">
+      <header class="room-header">
+        <div>
+          <span class="label">Room</span>
+          <strong id="roomLabel">-</strong>
+        </div>
+        <div class="room-user">
+          <span class="label">Name</span>
+          <strong id="myName">-</strong>
+          <button id="renameBtn" type="button" aria-label="Roll a new random name">🎲</button>
+        </div>
+        <button id="leaveBtn" type="button" class="secondary">Leave</button>
+      </header>
+
+      <div class="layout">
+        <div class="canvas-panel">
+          <canvas id="bgCanvas"></canvas>
+        </div>
+
+        <aside class="sidebar">
+          <div class="toolbar">
+            <label>
+              Brush size
+              <input id="brushSize" type="range" min="1" max="20" value="4" />
+            </label>
+
+            <div class="tool-row">
+              <label class="color-picker">Color
+                <input id="colorPicker" type="color" value="#90f5df" />
+              </label>
+              <button id="eraserBtn" type="button" class="secondary">Eraser</button>
+            </div>
+
+            <button id="clearCanvasBtn" type="button" class="secondary">Clear background</button>
+          </div>
+
+          <div class="panel">
+            <h3>Players</h3>
+            <ul id="userList"></ul>
+          </div>
+        </aside>
+
+        <section class="chat-panel">
+          <div id="messages"></div>
+          <form id="chatForm">
+            <input id="chatInput" maxlength="500" placeholder="Type a message..." autocomplete="off" />
+            <button type="submit" class="primary">Send</button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>
